@@ -1,25 +1,84 @@
 "use client";
 
 import { signIn } from "next-auth/react";
+import { useState } from "react";
+import Image from 'next/image';
+import Cat from '/public/kitten2.jpg';
 
 export default function Page() {
+    const [isLoading, setIsLoading] = useState(false);
+    const [errorMessage, setErrorMessage] = useState('');
+
+    const handleSignUp = async () => {
+        try {
+            setIsLoading(true);
+            setErrorMessage('');
+            
+            await signIn("google", {
+                callbackUrl: "http://localhost:3000/dashboard",
+            });
+        } catch (error) {
+            console.error("Sign up error:", error);
+            setErrorMessage('An error occurred during sign up. Please try again.');
+        } finally {
+            setIsLoading(false);
+        }
+    };
+
     return (
-        <div className="flex flex-col items-center">
-            <div className="flex flex-col min-h-screen w-full items-center justify-center p-6 md:p-10 bg-gradient-to-br from-[#4285F4] via-[#DB4437] to-[#F4B400]">
-                <div className="w-full max-w-sm bg-white shadow-lg p-8 rounded-lg relative">
-                    <h2 className="text-3xl font-bold mb-4 text-gray-800">Sign Up To Zenmind</h2>
-                    <button
-                        onClick={() => signIn("google")}
-                        className="w-full border border-gray-300 py-2 rounded hover:bg-gray-100 text-gray-900 transition"
-                    >
-                        Sign Up with Google
-                    </button>
+        <div className="min-h-screen bg-gradient-to-br from-green-50 to-white flex items-center justify-center p-4">
+            <div className="max-w-4xl w-full grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+                <div className="relative h-64 md:h-96 w-full">
+                    <Image 
+                        src={Cat}
+                        alt="Cat illustration" 
+                        fill
+                        className="object-contain"
+                        priority
+                    />
                 </div>
-                <div className="w-full max-w-sm bg-white shadow-lg p-8 rounded-lg mt-6">
-                    <h3 className="text-xl font-semibold mb-2 text-gray-800">How It Works</h3>
-                    <p className="text-sm text-gray-600">
-                        We work with Google to provide a fast and secure way to sign in and create an account. Simply connect your Google account and get started!
-                    </p>
+                <div className="space-y-8">
+                    <div className="text-center md:text-left">
+                    </div>
+                    <div className="bg-white py-8 px-4 shadow-xl rounded-2xl sm:px-10">
+                        {errorMessage && (
+                            <div className="mb-4 p-4 bg-red-50 border border-red-200 rounded-lg">
+                                <p className="text-sm text-red-600">{errorMessage}</p>
+                            </div>
+                        )}
+                        <div className="mt-6">
+                            <h2 className="text-4xl font-extrabold text-gray-900 text-center">
+                                Join Zenmind
+                            </h2>
+                            <p className="mt-2 text-sm mb-4 text-gray-600 text-center ">
+                                Start your journey to a more mindful life
+                            </p>
+                            <button
+                                onClick={handleSignUp}
+                                disabled={isLoading}
+                                className="group relative w-full flex justify-center py-3 px-4 border border-transparent text-sm font-medium rounded-lg text-white bg-green-600 hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500 transition-all duration-200 disabled:opacity-50"
+                            >
+                                <span className="absolute left-0 inset-y-0 flex items-center pl-3">
+                                    <svg className="h-5 w-5 text-green-500 group-hover:text-green-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+                                        <path fillRule="evenodd" d="M10 3a1 1 0 011 1v5h5a1 1 0 110 2h-5v5a1 1 0 11-2 0v-5H4a1 1 0 110-2h5V4a1 1 0 011-1z" clipRule="evenodd" />
+                                    </svg>
+                                </span>
+                                {isLoading ? 'Signing up...' : 'Sign up with Google'}
+                            </button>
+                        </div>
+                        <div className="mt-6">
+                            <div className="relative">
+                                <div className="absolute inset-0 flex items-center">
+                                    <div className="w-full border-t border-gray-300"></div>
+                                </div>
+                                <div className="relative flex justify-center text-sm">
+                                    <span className="px-2 bg-white text-gray-500">
+                                        Begin your mindfulness journey today
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

@@ -1,14 +1,21 @@
-'use client';
+import { Inter } from 'next/font/google';
 import './globals.css';
-import { SessionProvider } from 'next-auth/react';
+import { NextAuthProvider } from './providers';
+
+const inter = Inter({ subsets: ['latin'] });
+
+export const metadata = {
+    title: 'ZenMind - Stress Management',
+    description: 'Your personalized stress management companion',
+};
 
 export default function RootLayout({ children }) {
     return (
-        <html>
-            <body>
-                <SessionProvider>
+        <html lang="en">
+            <body className={inter.className}>
+                <NextAuthProvider>
                     {children}
-                </SessionProvider>
+                </NextAuthProvider>
             </body>
         </html>
     );
