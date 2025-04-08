@@ -9,6 +9,7 @@ import MoodTracker from '@/components/MoodTracker';
 import BreathingExercise from '@/components/BreathingExercise';
 import MeditationTimer from '@/components/MeditationTimer';
 import GratitudeJournal from '@/components/GratitudeJournal';
+import DailyTip from '@/components/DailyTips';
 
 export default function Dashboard() {
   const { data: session, status } = useSession();
@@ -120,24 +121,7 @@ export default function Dashboard() {
 
           {/* Tips Section */}
           <div className="mt-6">
-            <div className="bg-white shadow rounded-lg p-6">
-              <h2 className="text-xl font-semibold mb-4 text-black">Daily Tips</h2>
-              <div className="space-y-4">
-                {tips && tips.length > 0 ? (
-                  tips.map((tip) => (
-                    <div key={tip._id} className="border rounded-lg p-4">
-                      <h3 className="font-semibold">{tip.title}</h3>
-                      <p className="text-gray-600 mt-2">{tip.content}</p>
-                      <span className="mt-2 inline-block px-2 py-1 bg-green-100 text-green-800 rounded-full text-xs">
-                        {tip.category}
-                      </span>
-                    </div>
-                  ))
-                ) : (
-                  <p className="text-black text-center py-4">No tips available at the moment.</p>
-                )}
-              </div>
-            </div>
+            <DailyTip />
           </div>
         </div>
       </main>
