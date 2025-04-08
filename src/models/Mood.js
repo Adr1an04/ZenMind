@@ -5,10 +5,14 @@ const moodSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
+  emoji: {
+    type: String,
+    required: true,
+    },
   mood: {
     type: String,
     required: true,
-    enum: ['happy', 'neutral', 'sad', 'anxious', 'stressed'],
+    enum: ['Happy', 'Neutral', 'Sad', 'Anxious', 'Calm', 'Angry', 'Frustrated', 'Tired'],
   },
   stressLevel: {
     type: Number,
