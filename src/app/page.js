@@ -100,7 +100,7 @@ export default function LandingPage() {
       <footer className="bg-white border-t border-gray-100">
         <div className="max-w-6xl mx-auto px-6 py-8">
           <div className="text-center text-gray-600">
-            © 2024 ZenMind. All rights reserved. 
+            © 2025 ZenMind. All rights reserved. 
             <a href="#" className="text-green-600 hover:underline ml-4">Terms</a>
             <a href="#" className="text-green-600 hover:underline ml-4">Privacy</a>
           </div>
