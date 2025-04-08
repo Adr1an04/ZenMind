@@ -89,14 +89,24 @@ export default function BreathingExercise() {
           ))}
         </div>
 
-        <div
-          className={`w-48 h-48 rounded-full flex items-center justify-center text-white text-2xl font-semibold transition-all duration-1000 ${getPhaseColor()}`}
-          style={{
-            transform: `scale(${isActive ? (currentPhase === 'inhale' ? 1.2 : 1) : 1})`,
-          }}
-        >
-          {timeLeft}
-        </div>
+        <div className="relative w-48 h-48">
+  <div className={`w-full h-full rounded-full ${getPhaseColor()} flex items-center justify-center`}>
+    <div
+      className="absolute rounded-full bg-white opacity-20"
+      style={{
+        width: `${(timeLeft / patterns[pattern][currentPhase]) * 100}%`,
+        height: `${(timeLeft / patterns[pattern][currentPhase]) * 100}%`,
+        transition: 'width 1s linear, height 1s linear',
+        top: '50%',
+        left: '50%',
+        transform: 'translate(-50%, -50%)',
+      }}
+    />
+    <div className="absolute text-white text-2xl font-semibold">
+      {timeLeft}
+    </div>
+  </div>
+</div>
 
         <div className="text-xl font-medium text-black">{getPhaseText()}</div>
 
