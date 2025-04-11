@@ -52,3 +52,9 @@ npm run dev
 ## License
 
 This project is licensed under the MIT License.
+
+
+## AI Usage
+
+-Breathing Exercises (Animation for the breathing timer)
+-Database Connection functions with MongoDB (POST, GET, etc.)
